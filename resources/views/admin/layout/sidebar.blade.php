@@ -91,14 +91,12 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="{{route('campaign_index')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Danh sách chiến dịch</p>
               </a>
             </li>
-            
           </ul>
-          
         </li>
        
       </ul>

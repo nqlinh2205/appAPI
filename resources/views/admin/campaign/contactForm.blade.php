@@ -1,3 +1,8 @@
+
+@extends('admin.layout.main')
+@section('content')
+@php
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,50 +15,53 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 offset-md-3 mt-5">
-                <h4>Contact us</h4><hr>
-
-                <form action="{{route('send.email')}}" method="POST">
-                    @if (Session::has('error'))
-                        <div class="alert alert-danger">
-                            {{Session::get('error')}}
-                        </div> 
-                    @endif
-                    @if (Session::has('success'))
-                    <div class="alert alert-success">
-                        {{Session::get('success')}}
-                    </div> 
+            <div class="col-md-12  mt-5">
+                <h4>Chi tiết chiến dịch</h4><hr>
+                @if (isset($detail))
+                    <form action="{{route('detail_update',$detail->id)}}" method="POST">
+                        {{ method_field('PUT') }}
+                @else
+                    <form action="{{route('detail_store',$campaign->id)}}" method="POST">    
                 @endif
                     @csrf
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Enter your name" value="{{old('name')}}">
-                        @error('name') <span class="text-danger"> {{$message}}</span>  @enderror
-                    </div>
 
+                   
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" placeholder="Enter your email" value="{{old('email')}}">
-                        @error('email') <span class="text-danger"> {{$message}}</span>  @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" class="form-control" name="subject" placeholder="Enter your subject" value="{{old('subject')}}">
+                        <label for="subject">Tiêu đề</label>
+                        <input type="text" class="form-control" name="subject" placeholder="Nhập tiêu đề" value="{{isset($detail->subject) ? $detail->subject :'' }}">
                         @error('subject') <span class="text-danger"> {{$message}}</span>  @enderror
                     </div>
-
                     <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea name="message" id="" cols="30" rows="10" class="form-control"></textarea>
+                        <label for="email">Gửi đến</label>
+                        <select name="email"  id="send_to">
+                            <option value="0" {{isset($detail->email) && $detail->email == 0 ? 'selected':'' }}>All</option>
+                            <option id="insert_email" value="1" {{isset($detail->email) && $detail->email == 1 ? 'selected':'' }}>Email</option>
+                        </select>
+                        <div id="list_email">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Nội dung</label>
+                        <textarea name="message" id="editor1" cols="30" rows="10" class="form-control">{{isset($detail->message) ? $detail->message :'' }}</textarea>
                         @error('message') <span class="text-danger"> {{$message}}</span>  @enderror
                     </div>
 
-                    <button class="btn btn-primary">Send</button>
+                    @if (isset($detail))
+                        <button class="btn btn-primary">Sửa</button>
+                    @else
+                        <button class="btn btn-primary">Tạo</button>
+                    @endif
                 </form>
             </div>
         </div>
     </div>
 
     <script type="text/javascript" src="{{asset('asset/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+    <script>
+        CKEDITOR.replace( 'editor1' );
+    </script>
 </body>
 </html>
+@endsection

@@ -6,6 +6,7 @@ use App\Http\Controllers\CouponControlle;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DetailcampaignController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +40,21 @@ Route::post('coupon/create/{id}',[CouponControlle::class, 'createCoupon'])->name
 Route::get('coupon/create/{id}',[CouponControlle::class, 'sendCoupon'])->name('coupon_send');
 
 //Campaign
-Route::get('/contact',[ContactController::class, 'index'])->name('contact_index');
 Route::post('/send',[ContactController::class, 'send'])->name('send.email');
 
+
+Route::get('/campaign/detail/{id}',[DetailcampaignController::class, 'index'])->name('contact_index');
+// Route::get('/campaign/edit/{id}',[DetailcampaignController::class, 'edit'])->name('contact_edit');
+Route::post('/campaign/detail/{id}',[DetailcampaignController::class, 'store'])->name('detail_store');
+Route::put('/campaign/edit/{id}',[DetailcampaignController::class, 'update'])->name('detail_update');
+//send compaign email
+Route::get('/campaign/send/{id}',[ContactController::class, 'sendEmailCampaign'])->name('campaign_send');
+
+Route::get('/campaign/list',[CampaignController::class, 'index'])->name('campaign_index');
+Route::post('/campaign/list',[CampaignController::class, 'store'])->name('campaign_store');
+Route::delete('/campaign/list/{id}',[CampaignController::class, 'delete'])->name('campaign_delete');
+
+Route::get('/campaign/handle',[ContactController::class, 'generateNameCustomer']);
+
+
+ 
