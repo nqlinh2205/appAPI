@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('admin.layout.main')
 
     
 @section('content')
@@ -11,9 +11,9 @@
 
 <div class="form-data "> 
     @if(!isset($product))
-        {!! Form::open(['route' => 'store', 'method'=>'POST', 'enctype'=>"multipart/form-data"]) !!}
+        {!! Form::open(['route' => 'product_store', 'method'=>'POST', 'enctype'=>"multipart/form-data"]) !!}
     @else
-        {!! Form::open(['route' =>['update',$product['id']], 'method'=>'post', 'enctype'=>"multipart/form-data"]) !!}
+        {!! Form::open(['route' =>['product_update',$product['id']], 'method'=>'post', 'enctype'=>"multipart/form-data"]) !!}
     @endif
     
     <div class="form-group">

@@ -15,15 +15,12 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getlist(Request $request){
-        $page = substr($request->url(),35);
+        $page = substr($request->url(),strlen($request->url())-1);
         $per_page = 10; // Or your desire number
         $current_page = $page; // By default 1. That reurns first 1 to 50. If 2 then return 51 to 100 and vice versa
 
         $product = Product::paginate($per_page, $current_page);
-        // $total_page = $product['meta']['total_pages'];
-        // $total_result = $product['meta']['total_results'];
-        
-        // $product =  WooCommerce::all('products',$options);
+      
         return view('admin/product/index',compact('product'));
     }
     public function index($page = 1)
@@ -61,6 +58,7 @@ class ProductController extends Controller
             'description' => $request['description'],
             'short_description' => $request['short_description'],
             'stock_quantity' => $request['stock_quantity'],
+            'manage_stock' => true,
             'categories' => [
                 [
                     'id' => $request['category']

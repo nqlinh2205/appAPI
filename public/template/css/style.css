@@ -1,0 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap');
+body, .main-menu > li > a{
+    font-family: 'Roboto' , sans-serif !important;
+}

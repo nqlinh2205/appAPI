@@ -1,11 +1,11 @@
-@extends('layout')
+@extends('admin.layout.main')
 @php
 
-        // dd($product);
+        // dd($product['data'][0]->name);
 @endphp
 @section('content')
 <h1 class="text-center">Danh mục sản phẩm</h1><br>
-<a href="{{route('create')}}" class="btn btn-primary mb-5">Thêm sản phẩm</a>
+<a href="{{route('product_create')}}" class="btn btn-primary mb-5">Thêm sản phẩm</a>
 <br>
 <span class="">Tổng số sản phẩm: 
     <h3 style="display:inline-block"><span class="badge badge-secondary">{{$product['meta']['total_results']}}</span></h3> 
@@ -26,7 +26,7 @@
         @foreach ($product['data'] as $item => $pd)
         <tr>
             {{-- <th scope="row">{{$item+1}}</th> --}}
-            <td>{{$pd->name}}</td>
+             <td>{{$pd->name}}</td>
             <td>
                 @foreach ($pd->images as $img)
                     <img src="{{$img->src}}" alt="" width="100">
@@ -36,12 +36,12 @@
             <td>{{$pd->stock_quantity}}</td>
             <td>
                 <span>
-                    {!! Form::open(['route' => ['destroy',$pd->id], 'method'=>'delete','onsubmit'=>'return confirm("Bạn muốn xoá??")'])  !!}
+                    {!! Form::open(['route' => ['product_destroy',$pd->id], 'method'=>'delete','onsubmit'=>'return confirm("Bạn muốn xoá??")'])  !!}
                     {!! Form::submit('Xoá',['class'=>'btn btn-danger btn-sm']) !!}
                 </span>
                 <span>
                     {!! Form::close() !!}
-                    <a href="{{route('edit',$pd->id)}}" class="btn btn-warning btn-sm">Sửa</a>
+                    <a href="{{route('product_edit',$pd->id)}}" class="btn btn-warning btn-sm">Sửa</a>
                 </span>
             </td>
         </tr>

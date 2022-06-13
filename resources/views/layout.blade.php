@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="{{asset('asset/css/bootstrap.min.css')}}">
+
 </head>
 <body>
     
