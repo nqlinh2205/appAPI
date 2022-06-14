@@ -57,7 +57,11 @@
                                     <td class="table-text"><div>{{$campaign->date_active}}</div></td>
                                     <td class="table-text"><div>
                                         @if ($campaign->active == 0)
-                                            <a href="{{route('campaign_send',$campaign->id)}}" class="btn btn-sm btn-primary">Gửi đi</a>
+                                            @if ($campaign->status == 0)
+                                                <button class="btn btn-sm btn-secondary" disabled >Chưa có nội dung</button> 
+                                            @else
+                                                <a href="{{route('campaign_send',$campaign->id)}}" class="btn btn-sm btn-primary" >Gửi đi</a>    
+                                            @endif
                                         @else
                                             <button href="#" class="btn btn-sm btn-secondary" disabled>Đã gửi</button>
                                         @endif

@@ -21,6 +21,7 @@ use App\Http\Controllers\DetailcampaignController;
 Route::get('/', function () {
     return view('admin.layout.main');
 });
+
 // Route::resource('product', ProductController::class);
 Route::get('product/create',[ProductController::class, 'create'])->name('product_create');
 Route::get('product/page/{page}',[ProductController::class, 'getlist'])->name('product_getlist');
